@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Scroll vertical et horizontal avec GSAP</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+
+  <body>
+    <!-- 1ere partie -->
+    <section id="s1">
+      <h1>&#8595; SCROLL &#8595;</h1>
+      <div class="boxScroll"></div>
+    </section>
+
+    <!-- 2e partie -->
+    <section id="s2">
+      <h1>&#8595; SCROLL &#8595;</h1>
+    </section>
+
+    <div class="horizontalScroll">
+      <div class="col">
+        <h1>1</h1>
+      </div>
+      <div class="col">
+        <h1>2</h1>
+      </div>
+      <div class="col">
+        <h1>3</h1>
+      </div>
+      <div class="col">
+        <h1>4</h1>
+      </div>
+      <div class="col">
+        <h1>5</h1>
+      </div>
+      <div class="col">
+        <h1>6</h1>
+      </div>
+      <div class="col">
+        <h1>7</h1>
+      </div>
+      <div class="col">
+        <h1>8</h1>
+      </div>
+      <div class="col">
+        <h1>9</h1>
+      </div>
+      <div class="col">
+        <h1>10</h1>
+      </div>
+    </div>
+
+    <section id="s3">
+      <h1 class="emoji">😵‍💫</h1>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+
+    <script>
+      gsap.registerPlugin(ScrollTrigger);
+
+      //1ère partie
+      gsap.to(".boxScroll", {
+        scrollTrigger: {
+          trigger: ".boxScroll",
+          //scrub: 1,
+          toggleActions: "restart pause resume pause",
+        },
+        x: 200,
+        duration: 1,
+        rotation: 180,
+        delay: 0.2,
+        backgroundColor: "#FF3EA5",
+        borderRadius: 20,
+      });
+
+
+      //2e partie
+      gsap.to(".horizontalScroll", {
+        xPercent: -100,
+        x: () => innerWidth,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".horizontalScroll",
+          start: "top top",
+          end: () => innerWidth * 10,
+          scrub: true,
+          pin: true,
+          invalidateOnRefresh: true,
+          anticipatePin: 1,
+        }
+      });
+
+      gsap.to(".emoji", { rotation: 360, duration: 2, repeat: -1 });
+    </script>
+  </body>
+
+</html>
